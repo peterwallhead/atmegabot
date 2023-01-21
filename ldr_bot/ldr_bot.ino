@@ -1,6 +1,11 @@
+// Notes:
+// - Using the Duinotech Leonardo Tiny Atmega32U4 Development Board (runs on 5V. 3 digital and 3 analog pins).
+// - Motor Shield is the Arduino Motor Shield L293 from DFROBOT.
+// - Motor Shield requires an external voltage supply on the VIN pin to provide enough current to the motors.   
+
 int EN1 = 9;  // Pin 9 of the Atmega32U4 connects to pin 6 on the Motor Shield
 int EN2 = 10; // Pin 10 of the Atmega32U4 connects to pin 5 on the Motor Shield
-int directionControlPin = 11;  // Pin 11 of the Atmega32U5 connects to both pin 7 and pin 4 of the Motor Shield to provide direction control
+int directionControlPin = 11;  // Pin 11 of the Atmega32U5 connects to both pin 7 and pin 4 of the Motor Shield to provide limited direction control
 
 int leftLDRPin = A0;
 int rightLDRPin = A1;
@@ -69,7 +74,7 @@ void loop() {
 
     if(leftMotorSpeed > rightMotorSpeed) {
       leftMotor(leftMotorSpeed, true);
-      rightMotor(random(100,200), true);
+      rightMotor(random(100,200), true); // Adds randomness to help prevent the robot fom getting stuck in corners
     } else {
       leftMotor(random(100,200), true);
       rightMotor(rightMotorSpeed, true);
@@ -85,8 +90,6 @@ void loop() {
 
     doReverse = false;
   }
-
-  
   
   //Serial.println(leftLDRValue);
   //Serial.println(rightLDRValue);
